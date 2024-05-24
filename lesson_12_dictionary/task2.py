@@ -70,7 +70,7 @@ while any(accounts_dict[wallet]["transactions"] < tx_target for wallet in accoun
         if accounts_dict[wallet]["activities"][activity] == 0:
             weights.append(1)
         else:
-            weights.append(0.5)
+            weights.append(0.1)
 
     # Берем случайную активность на основе ее "веса"
     random_action = random.choices(activities, weights=weights, k=1)[0]
