@@ -83,14 +83,10 @@ while any(accounts_dict[wallet]["transactions"] < tx_target for wallet in accoun
         balance_eth += tx_cost * 2 * random.uniform(0.7, 1.2)
         print(f"Пополняем баланс на {balance_eth:.4f}")
 
-    if random_action == "Mint NFT":  # Минтим НФТ
+    if random_action != "Swap":  # Если не свап
         balance_eth -= tx_cost
-        accounts_dict[wallet]["activities"]["Mint NFT"] += 1  # Обновляем счетчик активностей
-        accounts_dict[wallet]["transactions"] += 1  # Обновляем общий счетчик активностей
-        time.sleep(random.uniform(0.5, 1.5))
-    elif random_action == "Burn NFT":  # Сжигаем НФТ
-        balance_eth -= tx_cost
-        accounts_dict[wallet]["activities"]["Burn NFT"] += 1  # Обновляем счетчик активностей
+        accounts_dict[wallet]["activities"][random_action] += 1  # Передаем активность в качестве значения.
+        # Обновляем счетчик активностей
         accounts_dict[wallet]["transactions"] += 1  # Обновляем общий счетчик активностей
         time.sleep(random.uniform(0.5, 1.5))
     elif random_action == "Swap":  # Если обмен
