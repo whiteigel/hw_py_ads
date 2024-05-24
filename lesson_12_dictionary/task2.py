@@ -125,13 +125,13 @@ while any(accounts_dict[wallet]["transactions"] < tx_target for wallet in accoun
 
 # Выводим статистику
 print(f"\nСтатистика работы:")
-for account in accounts_dict.keys():
+for account, stats in accounts_dict.items():
     print(f"Кошелек {account}:")
-    print(f"---Баланс ETH: {accounts_dict[account]['balances']['ETH']}")
-    print(f"---Баланс USDC: {accounts_dict[account]['balances']['USDC']}")
-    print(f"---Количество транзакций: {accounts_dict[account]['transactions']}")
-    print(f"---Количество транзакций Swap: {accounts_dict[account]['activities']['Swap']}")
-    print(f"---Количество транзакций Mint NFT: {accounts_dict[account]['activities']['Mint NFT']}")
-    print(f"---Количество транзакцийBurn NFT: {accounts_dict[account]['activities']['Burn NFT']}")
+    print(f"---Баланс ETH: {stats['balances']['ETH']}")
+    print(f"---Баланс USDC: {stats['balances']['USDC']}")
+    print(f"---Количество транзакций: {stats['transactions']}")
+    print(f"---Количество транзакций Swap: {stats['activities']['Swap']}")
+    print(f"---Количество транзакций Mint NFT: {stats['activities']['Mint NFT']}")
+    print(f"---Количество транзакцийBurn NFT: {stats['activities']['Burn NFT']}")
     print("-" * 50)
 print(f"\nРабота завершена. Бип-бип!")
