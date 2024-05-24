@@ -4,7 +4,7 @@ import time
 # Определяем значения
 wallets_num = int(input("Укажите сколько кошельков нужно создать: "))
 tx_target = int(input("Укажите сколько транзакций нужно сделать: "))
-eth_price = random.randint(2000, 3000)  # Цена ETH в USDC
+eth_price = random.randint(2000, 3000)  # Случайная цена ETH в USDC
 gas_limit = 30
 
 # Словарь активностей с рандомными значениями
@@ -79,7 +79,7 @@ while any(accounts_dict[wallet]["transactions"] < tx_target for wallet in accoun
 
     print(f"Газ = {gas}. Выполняем активность {random_action} на {tx_cost:.4f} ETH")
 
-    if tx_cost > balance_eth:  # БПополняем баланс адреса, если нулевой
+    if tx_cost > balance_eth:  # Пополняем баланс адреса, если нулевой
         balance_eth += tx_cost * 2 * random.uniform(0.7, 1.2)
         print(f"Пополняем баланс на {balance_eth:.4f}")
 
