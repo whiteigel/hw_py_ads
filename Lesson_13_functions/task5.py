@@ -54,8 +54,8 @@ def withdraw_from_cex(address: str, min_balance: float) -> float:
     return balance
 
 
-def main():
-    wallet_list_generator(5)
+def main(wallet_num: int):
+    wallet_list_generator(wallet_num)
 
     for wallet in outer_wallets_list:
         password = password_generator(length=12, letters=True, digits=True, chars=True)
@@ -68,4 +68,4 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    main(wallet_num=5)
