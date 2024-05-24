@@ -96,8 +96,8 @@ while any(accounts_dict[wallet]["transactions"] < tx_target for wallet in accoun
     elif random_action == "Swap":  # Если обмен
         if balance_usdc > 0:  # Обмениваем все USDC на ETH
             print(f"Меняем USDC на ETH")
-            amount_eth = balance_usdc / eth_price # Определяем, сколько получим еф при обмене
-            balance_eth += amount_eth # Увеличиваем баланс эф
+            amount_eth = balance_usdc / eth_price  # Определяем, сколько получим еф при обмене
+            balance_eth += amount_eth  # Увеличиваем баланс эф
             balance_usdc = 0  # Все USDC конвертированы в ETH
             print(f"Баланс ETH: {balance_eth:.4f}, баланс USDC: {balance_usdc:.4f}")
             time.sleep(random.uniform(0.5, 1.5))
@@ -105,8 +105,8 @@ while any(accounts_dict[wallet]["transactions"] < tx_target for wallet in accoun
             print(f"Меняем ETH на USDC")
             max_eth_for_swap = balance_eth - tx_cost  # Определяем, сколько эф можем обменять
             if max_eth_for_swap > 0:  # Если сумма обмена больше 0
-                random_amount_eth = random.uniform(0.01,
-                                                   max_eth_for_swap)  # Выбираем случайное количество ETH для обмена, оставляя tx_cost на балансе
+                # Выбираем случайное количество ETH для обмена, оставляя tx_cost на балансе
+                random_amount_eth = random.uniform(0.01, max_eth_for_swap)
                 balance_usdc += random_amount_eth * eth_price  # Увеличиваем баланс юсдц на сумму обмена
                 balance_eth -= random_amount_eth + tx_cost  # Уменьшаем баланс эф
                 print(f"Баланс ETH: {balance_eth:.4f}, баланс USDC: {balance_usdc:.4f}")
