@@ -42,7 +42,7 @@ while any(accounts_dict[wallet]["transactions"] < tx_target for wallet in accoun
         else:
             direction = random.choice([-1, 1])
         gas += direction
-        time.sleep(0.1)
+        # time.sleep(0.1)
 
     # Ура! Газ пришел, начинаем работать
     print(f"Газ = {gas}. Начинаем работу...")
@@ -85,11 +85,8 @@ while any(accounts_dict[wallet]["transactions"] < tx_target for wallet in accoun
 
     if random_action != "Swap":  # Если не свап
         balance_eth -= tx_cost
-        accounts_dict[wallet]["activities"][random_action] += 1  # Передаем активность в качестве значения.
-        # Обновляем счетчик активностей
-        accounts_dict[wallet]["transactions"] += 1  # Обновляем общий счетчик активностей
         time.sleep(random.uniform(0.5, 1.5))
-    elif random_action == "Swap":  # Если обмен
+    else:
         if balance_usdc > 0:  # Обмениваем все USDC на ETH
             print(f"Меняем USDC на ETH")
             amount_eth = balance_usdc / eth_price  # Определяем, сколько получим еф при обмене
@@ -107,13 +104,9 @@ while any(accounts_dict[wallet]["transactions"] < tx_target for wallet in accoun
                 balance_eth -= random_amount_eth + tx_cost  # Уменьшаем баланс эф
                 print(f"Баланс ETH: {balance_eth:.4f}, баланс USDC: {balance_usdc:.4f}")
                 time.sleep(random.uniform(0.5, 1.5))
-            else:
-                print("Не хватает газа для поведения обмена")
-        accounts_dict[wallet]["activities"]["Swap"] += 1  # Обновляем счетчик активностей
-        accounts_dict[wallet]["transactions"] += 1  # Обновляем общий счетчик активностей
-    else:
-        print(f"Если в доме нету денег, привяжите к заду веник."
-              f"Привяжите и метите. Наметете-приходите.")
+
+    accounts_dict[wallet]["activities"][random_action] += 1  # Обновляем счетчик активностей
+    accounts_dict[wallet]["transactions"] += 1  # Обновляем общий счетчик активностей
 
     # Сохраняем изменения балансов
     accounts_dict[wallet]["balances"]["ETH"] = round(balance_eth, 4)
