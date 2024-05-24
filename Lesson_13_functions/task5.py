@@ -42,7 +42,7 @@ def gas_checker(gas_limit: int) -> int:
             return gas_price
 
 
-def withdraw_from_cex(address: str, min_balance: float):
+def withdraw_from_cex(address: str, min_balance: float) -> float:
     print(f"Проверяем баланс адреса {address}...")
     time.sleep(1)
     balance = random.uniform(700, 1200)
