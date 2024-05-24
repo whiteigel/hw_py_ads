@@ -36,9 +36,13 @@ def refill_balance(balance: float, cost: float) -> float:
     return balance
 
 
+def generate_wallet() -> str:
+    return "0x" + ''.join(random.choice("abcdef0123456789") for _ in range(40))
+
+
 def generate_account_dict(wallets: int) -> Dict[str, dict]:
     return {
-        "0x" + ''.join(random.choice("abcdef0123456789") for _ in range(40)): {
+        generate_wallet(): {
             "balances": {"ETH": round(random.uniform(0.2, 0.8), 4), "USDC": random.randint(0, 50)},
             "transactions": 0,
             "activities": {"Swap": 0, "Mint NFT": 0, "Burn NFT": 0}
