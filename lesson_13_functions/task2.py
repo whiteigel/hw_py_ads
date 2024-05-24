@@ -19,5 +19,5 @@ def password_generator(length: int, letters: bool, digits: bool, chars: bool) ->
     return password
 
 
-password = password_generator(length=30, letters=True, digits=True, chars=True)
-print(password)
+generated_password = password_generator(length=30, letters=True, digits=True, chars=True)
+print(generated_password)

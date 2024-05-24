@@ -3,15 +3,14 @@ import time
 import random
 from typing import List
 
-outer_wallets_list = []
+wallets_list = []
 
 
 def wallet_list_generator(wallet_number: int) -> List[str]:
-    global outer_wallets_list
-    inner_wallets_list = ["0x" + ''.join(random.choice("abcdef0123456789") for _ in range(40))
-                          for _ in range(wallet_number)]
-    outer_wallets_list = inner_wallets_list
-    return outer_wallets_list
+    global wallets_list
+    wallets_list = ["0x" + ''.join(random.choice("abcdef0123456789") for _ in range(40))
+                    for _ in range(wallet_number)]
+    return wallets_list
 
 
 def password_generator(length: int, letters: bool, digits: bool, chars: bool) -> str:
@@ -57,10 +56,10 @@ def withdraw_from_cex(address: str, min_balance: float) -> float:
 def main(wallet_num: int):
     wallet_list_generator(wallet_num)
 
-    for wallet in outer_wallets_list:
+    for wallet in wallets_list:
         password = password_generator(length=12, letters=True, digits=True, chars=True)
         print(f'Адрес: {wallet}, пароль: {password}')
-        gas = gas_checker(gas_limit=30)
+        gas_checker(gas_limit=30)
         balance = withdraw_from_cex(address=wallet, min_balance=1000)
         print(f'Адрес: {wallet}, баланс: {balance:.2f}')
         print("-" * 50)

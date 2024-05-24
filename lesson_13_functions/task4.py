@@ -3,7 +3,7 @@ import time
 
 
 def withdraw_from_cex(address: str, min_balance: float) -> float:
-    print("Проверяем баланс...")
+    print(f"Проверяем баланс для адреса {address}...")
     time.sleep(1)
     balance = random.uniform(0.01, 0.15)
     print(balance)

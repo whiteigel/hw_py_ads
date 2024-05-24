@@ -83,7 +83,7 @@ while any(accounts_dict[wallet]["transactions"] < tx_target for wallet in accoun
         balance_eth += tx_cost * 2 * random.uniform(0.7, 1.2)
         print(f"Пополняем баланс на {balance_eth:.4f}")
 
-    if random_action != "Swap":  # Если не свап
+    if random_action != "Swap":  # Если не обмен
         balance_eth -= tx_cost
         time.sleep(random.uniform(0.5, 1.5))
     else:
