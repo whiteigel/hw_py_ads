@@ -11,4 +11,6 @@ Lesson 8. Цикл "while" \
 Lesson 9. Списки \
 Lesson 10. Методы списков \
 Lesson 11. Цикл "for" \
-Lesson 12. Словари
+Lesson 12. Словари \
+Lesson 13. Функции \
+Lesson 14. Возврат значений, типизация
