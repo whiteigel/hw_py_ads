@@ -55,7 +55,7 @@ def gas_generator(limit: int) -> int:
     _ = random.choice([-1, 1])
     gas_price = random.randint(10, 50)
     while gas_price >= limit:
-        print(f"Current gas: {gas_price}")
+        # print(f"Current gas: {gas_price}")
         if gas_price >= 50:
             direction = -1
         elif gas_price <= 10:
@@ -65,6 +65,36 @@ def gas_generator(limit: int) -> int:
         gas_price += direction
         # time.sleep(0.1)  # Для имитации задержки, если необходимо
     return gas_price
+
+
+def make_swap(balance_usdc, balance_eth, random_action, tx_cost):
+    if balance_usdc > 0:  # Обмениваем все USDC на ETH
+        print(f"Меняем USDC на ETH")
+        amount_eth = balance_usdc / eth_price  # Определяем, сколько получим еф при обмене
+        balance_eth += amount_eth  # Увеличиваем баланс эф
+        balance_usdc = 0  # Все USDC конвертированы в ETH
+        print(f"Активность {random_action} выполнена. "
+              f"Баланс ETH: {balance_eth:.4f}, баланс USDC: {balance_usdc:.4f}")
+        time.sleep(random.uniform(0.5, 1.5))
+    else:  # Обмениваем ETH на USDC
+        print(f"Меняем ETH на USDC")
+        max_eth_for_swap = balance_eth - tx_cost  # Определяем, сколько эф можем обменять
+        if max_eth_for_swap > 0:  # Если сумма обмена больше 0
+            # Выбираем случайное количество ETH для обмена, оставляя tx_cost на балансе
+            random_amount_eth = random.uniform(0.01, max_eth_for_swap)
+            balance_usdc += random_amount_eth * eth_price  # Увеличиваем баланс юсдц на сумму обмена
+            balance_eth -= random_amount_eth + tx_cost  # Уменьшаем баланс эф
+            print(f"Активность {random_action} выполнена. "
+                  f"Баланс ETH: {balance_eth:.4f}, баланс USDC: {balance_usdc:.4f}")
+            time.sleep(random.uniform(0.5, 1.5))
+    return balance_usdc, balance_eth
+
+
+def make_mint_burn(balance_eth, random_action, tx_cost):
+    balance_eth -= tx_cost
+    print(f"Активность {random_action} выполнена. Баланс: {balance_eth:.4f}")
+    time.sleep(random.uniform(0.5, 1.5))
+    return balance_eth
 
 
 def main():
@@ -112,29 +142,9 @@ def main():
             print(f"Пополняем баланс на {balance_eth:.4f}")
 
         if random_action != "Swap":  # Если не обмен
-            balance_eth -= tx_cost
-            print(f"Активность {random_action} выполнена. Баланс: {balance_eth:.4f}")
-            time.sleep(random.uniform(0.5, 1.5))
-        else:
-            if balance_usdc > 0:  # Обмениваем все USDC на ETH
-                print(f"Меняем USDC на ETH")
-                amount_eth = balance_usdc / eth_price  # Определяем, сколько получим еф при обмене
-                balance_eth += amount_eth  # Увеличиваем баланс эф
-                balance_usdc = 0  # Все USDC конвертированы в ETH
-                print(f"Активность {random_action} выполнена. "
-                      f"Баланс ETH: {balance_eth:.4f}, баланс USDC: {balance_usdc:.4f}")
-                time.sleep(random.uniform(0.5, 1.5))
-            else:  # Обмениваем ETH на USDC
-                print(f"Меняем ETH на USDC")
-                max_eth_for_swap = balance_eth - tx_cost  # Определяем, сколько эф можем обменять
-                if max_eth_for_swap > 0:  # Если сумма обмена больше 0
-                    # Выбираем случайное количество ETH для обмена, оставляя tx_cost на балансе
-                    random_amount_eth = random.uniform(0.01, max_eth_for_swap)
-                    balance_usdc += random_amount_eth * eth_price  # Увеличиваем баланс юсдц на сумму обмена
-                    balance_eth -= random_amount_eth + tx_cost  # Уменьшаем баланс эф
-                    print(f"Активность {random_action} выполнена. "
-                          f"Баланс ETH: {balance_eth:.4f}, баланс USDC: {balance_usdc:.4f}")
-                    time.sleep(random.uniform(0.5, 1.5))
+            balance_eth = make_mint_burn(balance_eth, random_action, tx_cost)
+        else:  # Если обмен
+            balance_usdc, balance_eth = make_swap(balance_usdc, balance_eth, random_action, tx_cost)
 
         accounts_dict[wallet]["activities"][random_action] += 1  # Обновляем счетчик активностей
         accounts_dict[wallet]["transactions"] += 1  # Обновляем общий счетчик активностей
