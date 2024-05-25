@@ -1,6 +1,6 @@
 import random
 import time
-from typing import Dict
+from typing import Dict, Tuple
 
 # Определяем значения
 wallets_num = int(input("Укажите сколько кошельков нужно создать: "))
@@ -67,7 +67,7 @@ def gas_generator(limit: int) -> int:
     return gas_price
 
 
-def make_swap(balance_usdc, balance_eth, random_action, tx_cost):
+def make_swap(balance_usdc: float, balance_eth: float, random_action: str, tx_cost: float) -> Tuple[float, float]:
     if balance_usdc > 0:  # Обмениваем все USDC на ETH
         print(f"Меняем USDC на ETH")
         amount_eth = balance_usdc / eth_price  # Определяем, сколько получим еф при обмене
@@ -90,7 +90,7 @@ def make_swap(balance_usdc, balance_eth, random_action, tx_cost):
     return balance_usdc, balance_eth
 
 
-def make_mint_burn(balance_eth, random_action, tx_cost):
+def make_mint_burn(balance_eth: float, random_action: str, tx_cost: float) -> float:
     balance_eth -= tx_cost
     print(f"Активность {random_action} выполнена. Баланс: {balance_eth:.4f}")
     time.sleep(random.uniform(0.5, 1.5))
