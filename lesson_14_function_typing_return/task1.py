@@ -17,6 +17,11 @@ activities_dict = {
 
 
 def print_stats(sts_dict: dict):
+    """
+    Функция печатает статистику по работе адреса
+    :param sts_dict: словарь со статистическими данными
+    :return: строки
+    """
     print(f"\nСтатистика работы:")
     for key, value in sts_dict.items():
         print(
@@ -32,15 +37,30 @@ def print_stats(sts_dict: dict):
 
 
 def refill_balance(balance: float, cost: float) -> float:
+    """
+    Функция, имитирующая пополнение баланса
+    :param balance: баланс
+    :param cost: стоимость транзакции
+    :return: обновленный баланс
+    """
     balance += cost * 2 * random.uniform(0.7, 1.2)
     return balance
 
 
 def generate_wallet() -> str:
+    """
+    Функция генерации случайного адреса
+    :return: адрес
+    """
     return "0x" + ''.join(random.choice("abcdef0123456789") for _ in range(40))
 
 
 def generate_account_dict(wallets: int) -> Dict[str, dict]:
+    """
+    Функция генерации структуры хранения данных по активности адреса
+    :param wallets: желаемое количество адресов
+    :return: словарь
+    """
     return {
         generate_wallet(): {
             "balances": {"ETH": round(random.uniform(0.2, 0.8), 4), "USDC": random.randint(0, 50)},
@@ -52,6 +72,11 @@ def generate_account_dict(wallets: int) -> Dict[str, dict]:
 
 
 def gas_generator(limit: int) -> int:
+    """
+    Функция генерации случайного значения газа и его проверки
+    :param limit: требуемое значение газа для работы
+    :return: значение газа
+    """
     _ = random.choice([-1, 1])
     gas_price = random.randint(10, 50)
     while gas_price >= limit:
@@ -67,7 +92,15 @@ def gas_generator(limit: int) -> int:
     return gas_price
 
 
-def make_swap(balance_usdc: float, balance_eth: float, random_action: str, tx_cost: float) -> Tuple[float, float]:
+def make_swap(balance_usdc: float, balance_eth: float, tx_cost: float, random_action: str = 'swap') -> Tuple[float, float]:
+    """
+    Функция имитирующая обмен ETH на USDC и обратно
+    :param balance_usdc: баланс USDC
+    :param balance_eth: баланс ETH
+    :param random_action: активность, по умолчанию - swap
+    :param tx_cost: случайная стоимость транзакции
+    :return: баланс USDC, баланс ETH
+    """
     if balance_usdc > 0:  # Обмениваем все USDC на ETH
         print(f"Меняем USDC на ETH")
         amount_eth = balance_usdc / eth_price  # Определяем, сколько получим еф при обмене
@@ -91,6 +124,13 @@ def make_swap(balance_usdc: float, balance_eth: float, random_action: str, tx_co
 
 
 def make_mint_burn(balance_eth: float, random_action: str, tx_cost: float) -> float:
+    """
+    Функция имитирующая минт и сжигание NFT
+    :param balance_eth: баланс ETH
+    :param random_action: случайная активность
+    :param tx_cost: случайная стоимость транзакции
+    :return: баланс ETH
+    """
     balance_eth -= tx_cost
     print(f"Активность {random_action} выполнена. Баланс: {balance_eth:.4f}")
     time.sleep(random.uniform(0.5, 1.5))
@@ -144,7 +184,7 @@ def main():
         if random_action != "Swap":  # Если не обмен
             balance_eth = make_mint_burn(balance_eth, random_action, tx_cost)
         else:  # Если обмен
-            balance_usdc, balance_eth = make_swap(balance_usdc, balance_eth, random_action, tx_cost)
+            balance_usdc, balance_eth = make_swap(balance_usdc, balance_eth, tx_cost, random_action)
 
         accounts_dict[wallet]["activities"][random_action] += 1  # Обновляем счетчик активностей
         accounts_dict[wallet]["transactions"] += 1  # Обновляем общий счетчик активностей

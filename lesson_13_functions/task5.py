@@ -9,7 +9,7 @@ wallets_list = []
 def wallet_list_generator(wallet_number: int) -> List[str]:
     """
     This function generates a list of all wallets in the system.
-    :param wallet_number:
+    :param wallet_number: Number of required wallets
     :return: a list of wallets in the system.
     """
     global wallets_list
@@ -61,7 +61,7 @@ def gas_checker(gas_limit: int) -> int:
 
 def withdraw_from_cex(address: str, min_balance: float) -> float:
     """
-    This function imitates the withdraw function.
+    This function imitates the withdrawal function.
     :param address: address of the wallet.
     :param min_balance: minimum balance of the wallet.
     :return: refilled balance of the wallet.
@@ -107,7 +107,6 @@ def print_stats(dictionary: dict):
                 key = 'баланс'
             print(f'---{key}: {value}')
         print("-" * 50)
-
 
 
 def main(wallet_num: int):
