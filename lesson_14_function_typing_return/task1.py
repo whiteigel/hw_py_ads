@@ -92,7 +92,8 @@ def gas_generator(limit: int) -> int:
     return gas_price
 
 
-def make_swap(balance_usdc: float, balance_eth: float, tx_cost: float, random_action: str = 'swap') -> Tuple[float, float]:
+def make_swap(balance_usdc: float, balance_eth: float, tx_cost: float, random_action: str = 'swap') -> (
+        Tuple)[float, float]:
     """
     Функция имитирующая обмен ETH на USDC и обратно
     :param balance_usdc: баланс USDC
