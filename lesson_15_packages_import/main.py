@@ -1,3 +1,4 @@
+import logging
 import random
 from functions.withdraw import (withdraw_binance as w_b, withdraw_okx as w_okx,
                                 withdraw_bybit as w_bybit)
@@ -8,6 +9,10 @@ addresses = ['0x3008099304a30800D8a89D27305Fe06fD9ed3337',
              '0x64684BCca02E8c349337022E8dCeC7d012A24EC0',
              '0x053C7ba445183638d955Ac37C292A37bE5f59E06',
              ]
+
+
+logging.basicConfig(filename='withdrawal.log', level=logging.INFO,
+                    format='%(asctime)s - %(levelname)s - %(message)s')
 
 cex_list = [w_b, w_bybit, w_okx]
 
@@ -29,7 +34,11 @@ def main(**kwargs):
             'address': address,
             'chain': kwargs['chain']
             }
-        cex(**withdraw_dict)
+        try:
+            cex(**withdraw_dict)
+            logging.info(f"Withdrawal successful: {withdraw_dict}")
+        except Exception as e:
+            logging.error(f"Error during withdrawal: {e}")
         print("-" * 50)
 
 
