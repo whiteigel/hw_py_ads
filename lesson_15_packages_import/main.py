@@ -11,24 +11,23 @@ addresses = ['0x3008099304a30800D8a89D27305Fe06fD9ed3337',
 
 cex_list = [w_b, w_bybit, w_okx]
 
-
 main_func_dict = {
     'address_list': addresses,
     'chain': 'Scroll',
-    'currency': 'ETH'
+    'currency': 'ETH',
+    'min_amount': 0.08,
+    'max_amount': 0.13,
     }
 
 
 def main(**kwargs):
     for address in kwargs['address_list']:
-        withdraw_chain = kwargs['chain']
-        withdraw_amount = random.uniform(0.08, 0.13)
         cex = random.choice(cex_list)
         withdraw_dict = {
-            'amount': round(withdraw_amount, 4),
+            'amount': round(random.uniform(kwargs['min_amount'], kwargs['max_amount']), 4),
             'currency': kwargs['currency'],
             'address': address,
-            'chain': withdraw_chain
+            'chain': kwargs['chain']
             }
         cex(**withdraw_dict)
         print("-" * 50)

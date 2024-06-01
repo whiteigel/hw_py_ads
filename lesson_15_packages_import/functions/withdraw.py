@@ -22,8 +22,8 @@ def withdraw_binance(amount: float, currency: str, address: str, chain: str) -> 
     Functions performs finding from Binance and returns balance
     :param amount: float amount to withdraw
     :param currency: string with currency code
-    :param address:
-    :param chain:
+    :param address: string with account address
+    :param chain: string with currency chain
     :return: float with balance
     """
     balance = check_balance(currency, address, chain)
@@ -38,8 +38,8 @@ def withdraw_okx(amount: float, currency: str, address: str, chain: str) -> floa
     Functions performs finding from OKX and returns balance
     :param amount: float amount to withdraw
     :param currency: string with currency code
-    :param address:
-    :param chain:
+    :param address: string with account address
+    :param chain: string with currency chain
     :return: float with balance
     """
     balance = check_balance(currency, address, chain)
@@ -54,8 +54,8 @@ def withdraw_bybit(amount: float, currency: str, address: str, chain: str) -> fl
     Functions performs finding from Bybit and returns balance
     :param amount: float amount to withdraw
     :param currency: string with currency code
-    :param address:
-    :param chain:
+    :param address: string with account address
+    :param chain: string with currency chain
     :return: float with balance
     """
     balance = check_balance(currency, address, chain)
