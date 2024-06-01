@@ -2,8 +2,6 @@ import random
 from functions.withdraw import (withdraw_binance as w_b, withdraw_okx as w_okx,
                                 withdraw_bybit as w_bybit)
 
-chains = ['Ethereum', 'Scroll', 'Linea', 'Arbitrum', 'zkSync', 'Base', 'Blast']
-
 addresses = ['0x3008099304a30800D8a89D27305Fe06fD9ed3337',
              '0x46Dbf7722b484CBd29cEA22D9b305923792B256C',
              '0x92bCbd4f26545Ba0e76024cD7aAa42766ba76CAd',
