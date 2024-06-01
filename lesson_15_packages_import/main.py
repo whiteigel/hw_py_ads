@@ -1,5 +1,5 @@
 import random
-from functions.withdraw import (withdraw_binance as wb, withdraw_okx as w_okx,
+from functions.withdraw import (withdraw_binance as w_b, withdraw_okx as w_okx,
                                 withdraw_bybit as w_bybit)
 
 chains = ['Ethereum', 'Scroll', 'Linea', 'Arbitrum', 'zkSync', 'Base', 'Blast']
@@ -11,7 +11,7 @@ addresses = ['0x3008099304a30800D8a89D27305Fe06fD9ed3337',
              '0x053C7ba445183638d955Ac37C292A37bE5f59E06',
              ]
 
-cex_list = [wb, w_bybit, w_okx]
+cex_list = [w_b, w_bybit, w_okx]
 
 if __name__ == '__main__':
     for address in addresses:
